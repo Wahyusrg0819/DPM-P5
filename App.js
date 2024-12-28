@@ -1,20 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+// Import library dan komponen yang diperlukan
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from './screens/HomeScreen';
+import DetailsScreen from './screens/DetailsScreen';
 
-export default function App() {
+// Membuat instance Stack Navigator
+const Stack = createStackNavigator();
+
+// Komponen utama App yang mengatur navigasi
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    // NavigationContainer adalah komponen wrapper yang mengelola state navigasi
+    <NavigationContainer>
+      {/* Stack.Navigator mengatur tumpukan layar dengan konfigurasi awal HomeScreen */}
+      <Stack.Navigator initialRouteName="Home">
+        {/* Mendefinisikan layar Home dengan komponennya */}
+        <Stack.Screen name="Home" component={HomeScreen} />
+        {/* Mendefinisikan layar Details dengan komponennya */}
+        <Stack.Screen name="Details" component={DetailsScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+// Mengekspor komponen App agar bisa digunakan di file lain
+export default App;
